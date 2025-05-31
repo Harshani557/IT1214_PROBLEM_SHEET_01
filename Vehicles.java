@@ -73,7 +73,7 @@ class ParkingLot {
     }
 }
 
-public class Vehicles {
+public class Main {
     public static void main(String[] args) {
         // Create parking lot instance
         ParkingLot lot = new ParkingLot();
