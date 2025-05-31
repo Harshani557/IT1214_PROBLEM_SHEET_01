@@ -64,7 +64,7 @@ class BookingSystem {
     }
 }
 
-public class Booking {
+public class Q4 {
     public static void main(String[] args) {
         BookingSystem system = new BookingSystem();
 
