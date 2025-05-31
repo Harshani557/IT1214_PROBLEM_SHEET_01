@@ -1,93 +1,107 @@
-class BankAccount {
-    private int accountNumber;
-    private String accountHolder;
-    private double balance;
+class Student {
+    private int studentId;
+    private String name;
+    private int daysAttended;
 
-    public BankAccount(int accountNumber, String accountHolder, double balance) {
-        this.accountNumber = accountNumber;
-        this.accountHolder = accountHolder;
-        this.balance = balance;
+    // Constructor
+    public Student(int studentId, String name, int daysAttended) {
+        this.studentId = studentId;
+        this.name = name;
+        this.daysAttended = daysAttended;
     }
 
-    public int getAccountNumber() {
-        return accountNumber;
+    // Getters
+    public int getStudentId() {
+        return studentId;
     }
 
-    public String getAccountHolder() {
-        return accountHolder;
+    public String getName() {
+        return name;
     }
 
-    public double getBalance() {
-        return balance;
+    public int getDaysAttended() {
+        return daysAttended;
     }
 
-    public void withdraw(double amount) {
-        if (amount > balance) {
-            throw new IllegalArgumentException("Insufficient balance");
-        }
-        balance -= amount;
+    // Setters
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
     }
 
-    public String toString() {
-        return "Account " + accountNumber + ", Holder: " + accountHolder + ", Balance: " + balance;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDaysAttended(int daysAttended) {
+        this.daysAttended = daysAttended;
+    }
+
+    // Method to display student details
+    public void displayDetails() {
+        System.out.println("ID: " + studentId + ", Name: " + name + ", Days Attended: " + daysAttended);
     }
 }
 
-class Bank {
-    private BankAccount[] accounts;
-    private int count;
 
-    public Bank() {
-        accounts = new BankAccount[5]; // Max 5 accounts
-        count = 0;
-    }
+class Classroom {
+    private Student[] students = new Student[10];
+    private int count = 0;
 
-    public void addAccount(BankAccount account) {
-        if (count < accounts.length) {
-            accounts[count++] = account;
+    // Method to add a new student
+    public void addStudent(Student student) {
+        if (count < 10) {
+            students[count] = student;
+            count++;
         } else {
-            System.out.println("Cannot add more accounts. Limit reached.");
+            System.out.println("Classroom is full.");
         }
     }
 
-    public void withdraw(int accountNumber, double amount) {
+    // Method to update attendance
+    public void updateAttendance(int studentId, int newDaysAttended) {
+        boolean found = false;
         for (int i = 0; i < count; i++) {
-            if (accounts[i].getAccountNumber() == accountNumber) {
-                try {
-                    accounts[i].withdraw(amount);
-                    System.out.println("Withdrawal successful.");
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
-                return;
+            if (students[i].getStudentId() == studentId) {
+                students[i].setDaysAttended(newDaysAttended);
+                System.out.println("Attendance updated for ID " + studentId);
+                found = true;
+                break;
             }
         }
-        System.out.println("Account not found.");
+        if (!found) {
+            System.out.println("Student with ID " + studentId + " not found.");
+        }
     }
 
-    public void displayAccounts() {
+    // Method to display all students
+    public void displayAllStudents() {
+        System.out.println("\nAll Student Details:");
         for (int i = 0; i < count; i++) {
-            System.out.println(accounts[i]);
+            students[i].displayDetails();
         }
     }
 }
+
 
 public class Main {
     public static void main(String[] args) {
-        Bank bank = new Bank();
+        // Create classroom
+        Classroom classroom = new Classroom();
 
-        // Add accounts
-        bank.addAccount(new BankAccount(1001, "Alice", 5000.0));
-        bank.addAccount(new BankAccount(1002, "Bob", 3000.0));
+        // Add students
+        classroom.addStudent(new Student(101, "Alice Smith", 12));
+        classroom.addStudent(new Student(102, "Bob Jones", 15));
+        classroom.addStudent(new Student(103, "Carol Lee", 10));
 
-        // Attempt invalid withdrawal
-        bank.withdraw(1001, 6000.0);
+        // Update Bob Jones's attendance to 16
+        classroom.updateAttendance(102, 16);
 
-        // Valid withdrawal
-        bank.withdraw(1002, 1000.0);
+        // Try to update non-existent student ID 104
+        classroom.updateAttendance(104, 14);
 
-        // Display all accounts
-        bank.displayAccounts();
+        // Display all students
+        classroom.displayAllStudents();
     }
 }
+
 
