@@ -1,14 +1,17 @@
 class BankAccount {
+    //1
     private int accountNumber;
     private String accountHolder;
     private double balance;
 
+    //constructor
     public BankAccount(int accountNumber, String accountHolder, double balance) {
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = balance;
     }
 
+    //getter
     public int getAccountNumber() {
         return accountNumber;
     }
@@ -21,6 +24,7 @@ class BankAccount {
         return balance;
     }
 
+    //2
     public void withdraw(double amount) {
         if (amount > balance) {
             throw new IllegalArgumentException("Insufficient balance");
@@ -33,10 +37,13 @@ class BankAccount {
     }
 }
 
+
+//3
 class Bank {
     private BankAccount[] accounts;
     private int count;
 
+//4
     public Bank() {
         accounts = new BankAccount[5]; // Max 5 accounts
         count = 0;
@@ -72,7 +79,8 @@ class Bank {
     }
 }
 
-public class Main {
+//5
+public class Q3 {
     public static void main(String[] args) {
         Bank bank = new Bank();
 

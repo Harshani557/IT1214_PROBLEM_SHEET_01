@@ -3,6 +3,7 @@ class Vehicle {
     private String ownerName;
     private int hoursParked;
 
+    //1
     // Constructor
     public Vehicle(String licensePlate, String ownerName, int hoursParked) {
         this.licensePlate = licensePlate;
@@ -30,9 +31,11 @@ class Vehicle {
 }
 
 class ParkingLot {
+    //2
     private Vehicle[] vehicles = new Vehicle[5];
     private int count = 0;
 
+    //3
     // Add vehicle
     public void parkVehicle(Vehicle vehicle) {
         if (count < 5) {
@@ -48,7 +51,7 @@ class ParkingLot {
         boolean found = false;
         for (int i = 0; i < count; i++) {
             if (vehicles[i].getLicensePlate().equals(licensePlate)) {
-                // Shift remaining vehicles
+                // Shifting remaining vehicles
                 for (int j = i; j < count - 1; j++) {
                     vehicles[j] = vehicles[j + 1];
                 }
@@ -73,7 +76,8 @@ class ParkingLot {
     }
 }
 
-public class Main {
+    //4
+public class Q2 {
     public static void main(String[] args) {
         // Create parking lot instance
         ParkingLot lot = new ParkingLot();
